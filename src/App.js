@@ -22,5 +22,5 @@ class App extends Component {
 export default App;
 
 /*{ FullJson:-----http://www.mocky.io/v2/5c30a87e3000003400e77a87 AND
- cabDetails:-----http://www.mocky.io/v2/5c30a5b83000005100e77a84
+
  }*/
