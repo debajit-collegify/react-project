@@ -4,16 +4,37 @@ import './App.css';
 import { Badge } from 'reactstrap';
 import Header from "./component/header";
 import Grid from "./component/grid";
+import  Alertcomponent from "./component/alertcomponent";
 
 
 class App extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            bookingFlag : false,
+            bookingIdShow: null,
+            alertMsgParam: null
+        };
+    }
+
+    showAlertHere = ( msg, id) => {
+        this.setState({
+            bookingFlag: true,
+            bookingIdShow : id,
+            alertMsgParam: msg
+        });
+    }
+
   render() {
+
     return (
       <div className="App">
         <h2>Book Your <Badge color="primary">CAB</Badge> Here</h2>
         <Header />
 
-        <Grid />
+          {(this.state.bookingFlag) ? <Alertcomponent alertMsg={ this.state.alertMsgParam +'' + this.state.bookingIdShow }  /> : ''}
+
+        <Grid fromAppAlertFlow = {this.showAlertHere}/>
       </div>
     );
   }

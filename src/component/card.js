@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
 import ModalNested from "./nestedmodal";
+
 class CardComponent extends  React.Component {
 
     constructor(props) {
@@ -19,11 +20,12 @@ class CardComponent extends  React.Component {
     }
 
 
-
     render() {
         const { imgSrc ,carType , budgetPlanPerHr , cabTitle , carNUmber} = this.props.componentData;
         return (
+
             <div>
+
                 <Card>
                     <CardImg top width="100%" src={imgSrc} alt="Card image cap" />
                     <CardBody>
@@ -35,7 +37,7 @@ class CardComponent extends  React.Component {
                     </CardBody>
                 </Card>
                 {
-                    this.state.toggle ? <ModalNested modalState={this.state.toggle} toggle={this.toggle.bind(this)} forwordCardData={this.props.componentData}/> : ''
+                    this.state.toggle ? <ModalNested fromAppViaGridViaCardAlertFlow = {this.props.fromAppViaGridAlertFlow} modalState={this.state.toggle} toggle={this.toggle.bind(this)} forwordCardData={this.props.componentData}/> : ''
                 }
             </div>
         );

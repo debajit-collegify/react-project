@@ -17,7 +17,7 @@ class ModalNested extends React.Component {
                 <Modal isOpen={this.props.modalState}>
                     <ModalHeader>Booking Details</ModalHeader>
                     <ModalBody>
-                        <ModalForm forwordForwordData={this.props.forwordCardData}/>
+                        <ModalForm fromAppViaGridViaCardViamodalAlertFlow = {this.props.fromAppViaGridViaCardAlertFlow} confirm={this.props.toggle.bind(this)} forwordForwordData={this.props.forwordCardData}/>
                         <br />
                         {/*{console.log(this.props.forwordCardData)}*/}
                     </ModalBody>

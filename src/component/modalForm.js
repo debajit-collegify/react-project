@@ -2,6 +2,7 @@ import React from 'react';
 import { Col, Row,Button, Form, FormGroup, Label, Input, FormText ,FormFeedback } from 'reactstrap';
 import axios from 'axios';
 import env from '../env.json';
+import  Alertcomponent from "./alertcomponent";
 
 class ModalForm extends React.Component {
     constructor(props){
@@ -110,6 +111,9 @@ class ModalForm extends React.Component {
                 "Testing Mail" ,false , {code:this.state.bookingDetails.bookingId});
 
             alert("Data submitted successfuly");
+            this.props.confirm();
+            this.props.fromAppViaGridViaCardViamodalAlertFlow("Booking confirmed with booking ID :-" , this.state.bookingDetails.bookingId);
+
         }
 
     }
@@ -142,7 +146,9 @@ class ModalForm extends React.Component {
         //console.log(this.props.forwordForwordData);
        // console.log(this.value);
         return (
+
             <Form>
+                {/*<Alertcomponent alertMsg={"booking confirmed with booking ID :-" + this.state.bookingDetails.bookingId}  />*/}
                 <Row form>
                     <Col md={6}>
                 <FormGroup>
