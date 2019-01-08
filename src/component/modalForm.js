@@ -7,6 +7,7 @@ import  Alertcomponent from "./alertcomponent";
 class ModalForm extends React.Component {
     constructor(props){
         super(props);
+
         this.state = {
             startDateText : '',
             endDateText : '',
@@ -31,11 +32,15 @@ class ModalForm extends React.Component {
                     endDate:    null,
                     totalValue: null,
                     bookingId:  null
-                }
+                },
+            startDateVerify :null,
+            EndDateVerify : null,
+            nameVerify : null,
+            EmailVerify : null
         };
 
-
     }
+
     componentDidMount() {
         this.state.cabDetails.imgSrc = this.props.forwordForwordData.imgSrc;
         this.state.cabDetails.carType = this.props.forwordForwordData.carType;
@@ -60,41 +65,60 @@ class ModalForm extends React.Component {
         return diffDays;
     }
 
+    checkEmail(email) {
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        if (!reg.test(email)) return false;
+        return true;
+    }
+
     handleSubmitForm = (e) => {
         e.preventDefault();
-        //console.log(this.state);
-
-        var startDateVerify = '';
-        var EndDateVerify = '';
-        var nameVerify = '';
-        var EmailVerify = '';
-
 
         if (this.state.startDateText === ''
             && this.state.endDateText === ''
             && this.state.customerName === ''
             && this.state.customerEmail === '') {
 
-           /* if(this.state.startDateText === '') {
-                startDateVerify = "Data required";
-            }
-            if(this.state.endDateText === '') {
-                EndDateVerify = "Data required";
-            }
-            if(this.state.customerName === '') {
-                nameVerify = "Data required";
-            }
-            if(this.state.customerEmail === '') {
-                EmailVerify = "Data required";
-            }*/
+            this.setState({
+                    startDateVerify: "startDate should not Be Blank",
+                    EndDateVerify: "EndDate should not Be Blank",
+                    nameVerify: 'Name should not Be Blank',
+                    EmailVerify: 'Email should not Be Blank'
+            });
 
-            return;
-        }else{
+            return false;
+        }
 
-            /*alert(this.state.startDateText +"-->"+
-            this.state.endDateText+"-->"+
-            this.state.customerName+"-->"+
-            this.state.customerEmail);*/
+        if(this.state.startDateText !== '' && !this.state.startDateText > this.state.endDateText){
+            this.setState({startDateVerify: "StartDate should not Be GraterThan EndDate"});
+            //return false;
+        }
+        if(this.state.endDateText !== '' && this.state.endDateText < this.state.startDateText){
+            this.setState({startDateVerify: "EndDate should Be GraterThan StartDate"});
+            //return false;
+        }
+        if(this.state.customerName!== '' ){
+            this.setState({nameVerify: "" });
+            //return false;
+        }
+        if(this.state.customerEmail!=='' ){
+            this.setState({EmailVerify: "" });
+           // return false;
+        }
+
+
+        if(this.state.startDateText !== ''
+            && this.state.endDateText !== ''
+            && this.state.customerName !== ''
+            && this.state.customerEmail !== ''){
+
+            this.setState({
+                startDateVerify: '',
+                EndDateVerify: '',
+                nameVerify: '',
+                EmailVerify: ''
+            });
+
 
 
             this.state.userDetails.customerName = this.state.customerName;
@@ -106,13 +130,17 @@ class ModalForm extends React.Component {
                 this.dateDiffHere(this.state.startDateText , this.state.endDateText);
             this.state.bookingDetails.bookingId = "00ab1"+this.state.startDateText;
 
-            /*console.log(this.state);*/
+            //---------MAil function----------------//
+
+
             this.sendMail("debajit@collegify.com","login-mail",
                 "Testing Mail" ,false , {code:this.state.bookingDetails.bookingId});
 
             alert("Data submitted successfuly");
             this.props.confirm();
             this.props.fromAppViaGridViaCardViamodalAlertFlow("Booking confirmed with booking ID :-" , this.state.bookingDetails.bookingId);
+
+            return true;
 
         }
 
@@ -143,13 +171,11 @@ class ModalForm extends React.Component {
             console.log(this.state.customerEmail);
 
         }*/
-        //console.log(this.props.forwordForwordData);
-       // console.log(this.value);
+
         return (
 
             <Form>
-                {/*<Alertcomponent alertMsg={"booking confirmed with booking ID :-" + this.state.bookingDetails.bookingId}  />*/}
-                <Row form>
+                 <Row form>
                     <Col md={6}>
                 <FormGroup>
                     <Label for="exampleDate">StartDate:</Label>
@@ -160,8 +186,8 @@ class ModalForm extends React.Component {
                         value={this.state.startDateText}
                         onChange={this.onChangeData.bind(this)}
                         placeholder="Start date"/>
-                    <FormFeedback tooltip>Data is wrong</FormFeedback>
-                    <FormText>{this.startDateVerify}</FormText>
+                    <FormFeedback tooltip>Date is wrong</FormFeedback>
+                    <FormText>{this.state.startDateVerify}</FormText>
                 </FormGroup>
                     </Col>
                     <Col md={6}>
@@ -175,7 +201,7 @@ class ModalForm extends React.Component {
                         onChange={this.onChangeData.bind(this)}
                         placeholder="End date"/>
                     <FormFeedback tooltip>Data is wrong</FormFeedback>
-                    <FormText>{this.EndDateVerify}</FormText>
+                    <FormText>{this.state.EndDateVerify}</FormText>
                 </FormGroup>
                     </Col>
                 </Row>
@@ -184,13 +210,13 @@ class ModalForm extends React.Component {
                     <Label for="exampleName">Customer Name:</Label>
                     <Input type="text" name="customerName" value={this.state.customerName}  onChange={this.onChangeData.bind(this)} id="exampleName" placeholder="Your Name" />
                     <FormFeedback tooltip>Data is wrong</FormFeedback>
-                    <FormText>{this.nameVerify}</FormText>
+                    <FormText>{this.state.nameVerify}</FormText>
                 </FormGroup>
                 <FormGroup>
                     <Label for="examplePassword">Customer Email:</Label>
                     <Input type="email" name="customerEmail" value={this.state.customerEmail}  onChange={this.onChangeData.bind(this)} id="exampleemail" placeholder="Your Email" />
                     <FormFeedback tooltip>Data is wrong</FormFeedback>
-                    <FormText>{this.EmailVerify}</FormText>
+                    <FormText>{this.state.EmailVerify}</FormText>
                 </FormGroup>
                 <Button onClick={this.handleSubmitForm.bind(this)}>Confirm Booking</Button>
 
