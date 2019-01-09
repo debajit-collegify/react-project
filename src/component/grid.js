@@ -33,7 +33,8 @@ class Grid extends React.Component {
                         <Row>
                             {
                                 this.state.cabDetails.map((dynamicData, i) =>
-                                <Col sm="4" xs="12"><CardComponent fromAppViaGridAlertFlow = {this.props.fromAppAlertFlow} key={i} componentData = {dynamicData} /></Col>)
+                                <Col sm="4" xs="12"><CardComponent fromAppViaGridAlertFlow = {this.props.fromAppAlertFlow}
+                                 key={i} componentData = {dynamicData} /></Col>)
                             }
                         </Row>
                     </Col>

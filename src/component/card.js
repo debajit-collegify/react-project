@@ -34,7 +34,7 @@ class CardComponent extends  React.Component {
                         <CardText>CabTitle: <b>{cabTitle}</b></CardText>
                         <CardText>CarNumber: <b>{carNUmber}</b></CardText>
                         <Button onClick={this.toggle}>Book</Button>
-                    </CardBody>
+                    </CardBody><hr/>
                 </Card>
                 {
                     this.state.toggle ? <ModalNested fromAppViaGridViaCardAlertFlow = {this.props.fromAppViaGridAlertFlow} modalState={this.state.toggle} toggle={this.toggle.bind(this)} forwordCardData={this.props.componentData}/> : ''
