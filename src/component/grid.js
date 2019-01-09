@@ -14,6 +14,7 @@ class Grid extends React.Component {
 
         axios.get(`http://www.mocky.io/v2/5c33093a2e00007b12121e1d`)
             .then(res => {
+                console.log(res.data);
                 this.setState({cabDetails : res.data});
 
             });
@@ -27,14 +28,14 @@ class Grid extends React.Component {
 
                 <Row>
                     <Col sm="3" xs="12">
-                        <Col sm="12" xs="12"><SideBar /></Col>
+                        <Col sm="12" xs="12"><SideBar data={this.state.cabDetails}/></Col>
                     </Col>
                     <Col sm="9" xs="12">
                         <Row>
                             {
                                 this.state.cabDetails.map((dynamicData, i) =>
-                                <Col sm="4" xs="12"><CardComponent fromAppViaGridAlertFlow = {this.props.fromAppAlertFlow}
-                                 key={i} componentData = {dynamicData} /></Col>)
+                                <Col sm="4" xs="12"><CardComponent key={i} fromAppViaGridAlertFlow = {this.props.fromAppAlertFlow}
+                                componentData = {dynamicData} /></Col>)
                             }
                         </Row>
                     </Col>

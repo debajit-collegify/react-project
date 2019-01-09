@@ -10,7 +10,7 @@ export default class SideBar extends React.Component {
                 <p className="mark">FILTERS</p>
                 <Nav vertical>
                     <NavItem>
-                        <NavLink><FormControl /></NavLink>
+                        <NavLink>{this.props.data.length > 0 && <FormControl forwordDataCabDetails = {this.props.data}/>}</NavLink>
                     </NavItem>
 
                 </Nav>
