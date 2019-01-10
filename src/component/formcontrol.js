@@ -26,27 +26,52 @@ class FormControl extends React.Component {
             maxPrice: null,
             minPrice: null,
             selectValue : null,
-            rating: []      /*props.forwordDataCabDetails*/
+            rating: [],      /*props.forwordDataCabDetails*/
+            intrValArrState: [],
+            rate: null
         };
 
 
     }
 
+    dynamicRateBarCalculation = (max,min,interval) => {
+        //console.log(max+'----------------------'+min);
+        //var loopLength = Math.floor(((max-min)/10));
+        var j=0;
+        var chart = [];
+        for(j= parseInt(min) ; j < parseInt(max) ; j+=parseInt(interval)){
+            if(j === parseInt(min)){
+                chart.push(j +'-'+ (j+parseInt(interval)));
+            }else{
+                if(j < parseInt(max) && (j+parseInt(interval)) > parseInt(max)){
+                    chart.push('upto  ' + parseInt(max));
+                }else{
+                    chart.push((j+1) +'-'+ (j+parseInt(interval)));
+                }
+
+            }
+        }
+
+        return chart;
+
+    }
+
     componentWillMount() {
+
         this.state.rating = this.props.forwordDataCabDetails;
         var rates = [];
-        console.log(this.props);
         this.props.forwordDataCabDetails.map(function(value , key) {
             rates.push(value.budgetPlanPerHr)
         });
-        //_.values method to convert object to array.
+
+        /*this.setState({rating : rates}, () => {
+            max = _.max(this.state.rating);
+        });*/
         this.setState({rating : rates});
-        console.log( this.state.rating);
-       // alert(this.state.rating);
-        /*var arrRate = this.state.rating;
-        var maximum = _.max(arrRate);
-        console.log(maximum);
-        alert(maximum);*/
+        var max = _.max(rates);
+        var min = _.min(rates);
+        var intervalArr = this.dynamicRateBarCalculation(max,min,10);
+        this.setState({intrValArrState: intervalArr});
     }
 
     toggle() {
@@ -57,7 +82,7 @@ class FormControl extends React.Component {
 
     handleChange =(e) =>{
         this.setState({selectValue: e.target.value});
-        alert("working with handelChange for dropdown" + this.state.selectValue);
+        //alert("working with handelChange for dropdown" + this.state.selectValue);
     }
     onChangeData = (e) => {
         const state = this.state;
@@ -66,18 +91,31 @@ class FormControl extends React.Component {
     }
     handleSubmitForm = (e) => {
         e.preventDefault();
+
         alert("working with submit form");
     }
 
 
 
 render() {
-    console.log(this.state.rating);
-        return(
+    console.log(this.state);
+    const parentThis = this;
+    //console.log(this.props.demoData)
+    return(
 
             <Form>
 
                 {/*Input group*/}
+
+                {/*<InputGroup size="sm">
+                    <InputGroupAddon addonType="prepend">My name</InputGroupAddon>
+                    <Input
+                        type="text"
+                        name="name"
+                        value={this.props.demoData}
+                        onChange={this.props.onChnage}
+                        id="examplePriceMax"/>
+                </InputGroup><br/>*/}
 
                 <InputGroup size="sm">
                     <InputGroupAddon addonType="prepend">Max:</InputGroupAddon>
@@ -129,33 +167,24 @@ render() {
 
                 <FormGroup tag="fieldset">
                     <legend>Rating</legend>
-                    <FormGroup check>
-                        <Label check>
+
+                    {
+                        this.state.intrValArrState.map(function(val , key) {
+                            return <FormGroup check>
+                                <Label check>
+                                    <Input
+                                        type="radio"
+                                        name="rate"
+                                        key={key} value={val}
+                                        onChange={parentThis.onChangeData.bind(this)}
+                                    />
+                                    {val}
+                                </Label>
+                            </FormGroup>
+                        })
+                    }
 
 
-
-                            <Input
-                                type="radio"
-                                name="rating"
-                                value="10-20"
-                                checked={this.state.rating === '10-20'}
-                                onChange={this.onChangeData.bind(this)}
-                            />
-                            10-20
-                        </Label>
-                    </FormGroup>
-                    <FormGroup check>
-                        <Label check>
-                            <Input
-                                type="radio"
-                                name="rating"
-                                value='21-30'
-                                checked={this.state.rating === '21-30'}
-                                onChange={this.onChangeData.bind(this)}
-                            />
-                            21-30
-                        </Label>
-                    </FormGroup>
                 </FormGroup>
                 <Button onClick={this.handleSubmitForm.bind(this)}>Submit</Button>
             </Form>

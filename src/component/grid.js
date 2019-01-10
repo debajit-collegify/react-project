@@ -9,7 +9,8 @@ class Grid extends React.Component {
     constructor() {
         super();
         this.state = {
-            cabDetails: []
+            cabDetails: [],
+            demoData : 'chandan'
         }
 
         axios.get(`http://www.mocky.io/v2/5c33093a2e00007b12121e1d`)
@@ -21,6 +22,11 @@ class Grid extends React.Component {
 
     }
 
+    onChnage = () =>{
+        console.log("hello");
+    }
+
+
     render() {
         //console.log(this.state.cabDetails);
         return (
@@ -28,7 +34,7 @@ class Grid extends React.Component {
 
                 <Row>
                     <Col sm="3" xs="12">
-                        <Col sm="12" xs="12"><SideBar data={this.state.cabDetails}/></Col>
+                        <Col sm="12" xs="12"><SideBar demoData={this.state.demoData} data={this.state.cabDetails} demoFunction={this.onChnage.bind(this)}/></Col>
                     </Col>
                     <Col sm="9" xs="12">
                         <Row>
