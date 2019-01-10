@@ -10,7 +10,11 @@ class Grid extends React.Component {
         super();
         this.state = {
             cabDetails: [],
-            demoData : 'chandan'
+            demoData : '',
+            sideBarFormstateMinPrice: '',
+            sideBarFormstateMaxPrice: '',
+            sideBarFormstateSelectValue: '',
+            sideBarFormstateRate: ''
         }
 
         axios.get(`http://www.mocky.io/v2/5c33093a2e00007b12121e1d`)
@@ -22,19 +26,35 @@ class Grid extends React.Component {
 
     }
 
-    onChnage = () =>{
-        console.log("hello");
+    onChnage = (sideBarFormstate) =>{
+
+        this.setState({
+            sideBarFormstateMinPrice : sideBarFormstate.minPrice,
+            sideBarFormstateMaxPrice : sideBarFormstate.maxPrice,
+            sideBarFormstateSelectValue : sideBarFormstate.selectValue,
+            sideBarFormstateRate : sideBarFormstate.rate } ,
+
+            () => {
+            var res = this.state.sideBarFormstateRate.split("-");
+                //(res) ?
+            console.log(res[0]);
+            console.log(res[1]);
+            });
+
+
+
     }
 
 
     render() {
-        //console.log(this.state.cabDetails);
+        //console.log(this.state.sideBarFormstateRate);
         return (
             <Container>
 
                 <Row>
                     <Col sm="3" xs="12">
-                        <Col sm="12" xs="12"><SideBar demoData={this.state.demoData} data={this.state.cabDetails} demoFunction={this.onChnage.bind(this)}/></Col>
+                        <Col sm="12" xs="12"><SideBar demoData={this.state.demoData}
+                        data={this.state.cabDetails} demoFunction={this.onChnage.bind(this)}/></Col>
                     </Col>
                     <Col sm="9" xs="12">
                         <Row>

@@ -4,9 +4,6 @@ import FormControl from "./formcontrol";
 
 
 export default class SideBar extends React.Component {
-    onChnage = (e) =>{
-        console.log(e.taget.value);
-    }
 
     render() {
         return (

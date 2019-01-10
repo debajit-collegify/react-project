@@ -34,6 +34,7 @@ class FormControl extends React.Component {
 
     }
 
+
     dynamicRateBarCalculation = (max,min,interval) => {
         //console.log(max+'----------------------'+min);
         //var loopLength = Math.floor(((max-min)/10));
@@ -44,7 +45,7 @@ class FormControl extends React.Component {
                 chart.push(j +'-'+ (j+parseInt(interval)));
             }else{
                 if(j < parseInt(max) && (j+parseInt(interval)) > parseInt(max)){
-                    chart.push('upto  ' + parseInt(max));
+                    chart.push((j+1) +'-' + parseInt(max));
                 }else{
                     chart.push((j+1) +'-'+ (j+parseInt(interval)));
                 }
@@ -92,13 +93,15 @@ class FormControl extends React.Component {
     handleSubmitForm = (e) => {
         e.preventDefault();
 
-        alert("working with submit form");
+        this.props.onChnage(this.state);
+
+        //alert("working with submit form");
     }
 
 
 
 render() {
-    console.log(this.state);
+    //console.log(this.state);
     const parentThis = this;
     //console.log(this.props.demoData)
     return(
