@@ -6,6 +6,7 @@ import FormControl from "./formcontrol";
 export default class SideBar extends React.Component {
 
     render() {
+
         return (
             <div>
                 <p className="mark">FILTERS</p>

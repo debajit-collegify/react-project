@@ -110,16 +110,6 @@ render() {
 
                 {/*Input group*/}
 
-                {/*<InputGroup size="sm">
-                    <InputGroupAddon addonType="prepend">My name</InputGroupAddon>
-                    <Input
-                        type="text"
-                        name="name"
-                        value={this.props.demoData}
-                        onChange={this.props.onChnage}
-                        id="examplePriceMax"/>
-                </InputGroup><br/>*/}
-
                 <InputGroup size="sm">
                     <InputGroupAddon addonType="prepend">Max:</InputGroupAddon>
                     <Input
