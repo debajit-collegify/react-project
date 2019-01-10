@@ -72,6 +72,47 @@ class Grid extends React.Component {
                 var a = _.filter(this.state.cabDetails, { "cabTitle": "Maruti Alto" , "carType" : "Mini" });
             }
 
+/*
+            var cabDetails = [
+                {
+                    "imgSrc":"https://picsum.photos/200/300/?random",
+                    "carType":"Prime",
+                    "budgetPlanPerHr":"40",
+                    "cabTitle":"Swift Dezire",
+                    "carNUmber":"WB13G 2787"
+                },
+                {
+                    "imgSrc":"https://picsum.photos/200/300/?random",
+                    "carType":"sedan",
+                    "budgetPlanPerHr":"80",
+                    "cabTitle":"Swift",
+                    "carNUmber":"WB16J 7827"
+                },
+                {
+                    "imgSrc":"https://picsum.photos/200/300/?random",
+                    "carType":"Micro",
+                    "budgetPlanPerHr":"25",
+                    "cabTitle":"Tata Indica Vista",
+                    "carNUmber":"WB17AB 8987"
+                },
+                {
+                    "imgSrc":"https://picsum.photos/200/300/?random",
+                    "carType":"Mini",
+                    "budgetPlanPerHr":"15",
+                    "cabTitle":"Maruti Alto",
+                    "carNUmber":"WB13AH 2645"
+                },
+                {
+                    "imgSrc":"https://picsum.photos/200/300/?random",
+                    "carType":"Mini",
+                    "budgetPlanPerHr":"15",
+                    "cabTitle":"Maruti Alto",
+                    "carNUmber":"WB13G 2661"
+                }
+            ]
+            _.filter(cabDetails, { "cabTitle": "Maruti Alto" , "carType" : "Mini" });*/
+
+
 
 
             console.log("validation working");
