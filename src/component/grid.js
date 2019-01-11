@@ -91,6 +91,7 @@ class Grid extends React.Component {
 
             if(this.state.sideBarFormstateMaxPrice !== null)
             {
+                //console.log(parentThis.state.sideBarFormstateMaxPrice);
                 var temp = [];
                 var loopArr = this.state.cabDetails;
                 _.forEach(loopArr, function(value, key) {
@@ -101,6 +102,7 @@ class Grid extends React.Component {
                             if(val > 0 && val <= parseInt(parentThis.state.sideBarFormstateMaxPrice)){
                                 //console.log(key +':------'+ value);
                                 temp.push(value);
+                                console.log(value);
                             }
                         }
 
@@ -110,8 +112,13 @@ class Grid extends React.Component {
 
                 this.setState({cabDetailsFilter : temp});
 
-            }else if(this.state.sideBarFormstateMinPrice !== null)
+            }
+
+            //Single value check minPrice Start
+
+            if(this.state.sideBarFormstateMinPrice !== null)
             {
+                //console.log(parentThis.state.sideBarFormstateMinPrice);
                 var temp = [];
                 var loopArr = this.state.cabDetails;
                 _.forEach(loopArr, function(value, key) {
@@ -119,9 +126,10 @@ class Grid extends React.Component {
                         if(k === "budgetPlanPerHr")
                         {
 
-                            if(val > 0 && val <= parseInt(parentThis.state.sideBarFormstateMinPrice)){
+                            if(val >= parseInt(parentThis.state.sideBarFormstateMinPrice)){
                                 //console.log(key +':------'+ value);
                                 temp.push(value);
+                                console.log(value);
                             }
                         }
 
@@ -131,7 +139,11 @@ class Grid extends React.Component {
 
                 this.setState({cabDetailsFilter : temp});
 
-            }else if(this.state.sideBarFormstateMinPrice !== null && this.state.sideBarFormstateMaxPrice !== null){
+            }
+
+            //Combination of Max and Min
+
+            if(this.state.sideBarFormstateMinPrice !== null && this.state.sideBarFormstateMaxPrice !== null){
 
                 var temp = [];
                 var loopArr = this.state.cabDetails;
@@ -153,7 +165,28 @@ class Grid extends React.Component {
                 this.setState({cabDetailsFilter : temp});
             }
 
-            //--------------Single value check minPrice END------------------------------------------
+            //Type filter
+
+            if(this.state.sideBarFormstateSelectValue !== null){
+
+                var temp = [];
+                var loopArr = this.state.cabDetails;
+                _.forEach(loopArr, function(value, key) {
+                    _.forEach(value, function(val , k){
+                        if(k === "carType" && val === parentThis.state.sideBarFormstateSelectValue)
+                        {
+
+                            temp.push(value);
+                        }
+
+                    });
+
+                });
+                console.log(temp);
+
+                this.setState({cabDetailsFilter : temp});
+            }
+
 
         }else{
 
