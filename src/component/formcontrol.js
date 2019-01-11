@@ -28,7 +28,8 @@ class FormControl extends React.Component {
             selectValue : null,
             rating: [],      /*props.forwordDataCabDetails*/
             intrValArrState: [],
-            rate: null
+            rate: null,
+            rateCheckBox: []
         };
 
 
@@ -89,6 +90,9 @@ class FormControl extends React.Component {
         const state = this.state;
         state[e.target.name] = e.target.value;
         this.setState(state);
+    }
+    onChangeCheckBox = () => {
+        console.log("checkbox click working");
     }
     handleSubmitForm = (e) => {
         e.preventDefault();
@@ -166,7 +170,26 @@ render() {
                 <FormGroup tag="fieldset">
                     <legend>Pricing</legend>
 
+
                     {
+
+                        this.state.intrValArrState.map(function(val , key) {
+                            return  <FormGroup check>
+                                <Label check>
+                                    <Input
+                                        type="checkbox"
+                                        name="rateCheckBox"
+                                        key={key}
+                                        value={val}
+                                        onChange={parentThis.onChangeCheckBox.bind(this)}/>
+                                    {val}
+                                </Label>
+                            </FormGroup>
+                        })
+
+                    }
+
+                    {/*{
                         this.state.intrValArrState.map(function(val , key) {
                             return <FormGroup check>
                                 <Label check>
@@ -180,10 +203,12 @@ render() {
                                 </Label>
                             </FormGroup>
                         })
-                    }
+                    }*/}
 
 
                 </FormGroup>
+
+
                 <Button onClick={this.handleSubmitForm.bind(this)}>Submit</Button>
             </Form>
         );

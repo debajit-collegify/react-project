@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="12494bc6-645c-4c6b-a3e1-e14fd5b42c0f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/component/formcontrol.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/formcontrol.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/grid.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/grid.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/component/formcontrol.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="133" lean-forward="true" selection-start-line="133" selection-end-line="133" />
+            <state relative-caret-position="-1201">
+              <caret line="94" column="46" lean-forward="true" selection-start-line="94" selection-start-column="46" selection-end-line="94" selection-end-column="46" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -49,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/component/grid.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="131" column="51" lean-forward="true" selection-start-line="131" selection-start-column="51" selection-end-line="131" selection-end-column="51" />
+            <state relative-caret-position="900">
+              <caret line="60" column="27" lean-forward="true" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -110,8 +109,8 @@
         <option value="$PROJECT_DIR$/src/component/modalForm.js" />
         <option value="$PROJECT_DIR$/src/component/card.js" />
         <option value="$PROJECT_DIR$/src/component/sidebar.js" />
-        <option value="$PROJECT_DIR$/src/component/formcontrol.js" />
         <option value="$PROJECT_DIR$/src/component/grid.js" />
+        <option value="$PROJECT_DIR$/src/component/formcontrol.js" />
       </list>
     </option>
   </component>
@@ -202,12 +201,12 @@
       <workItem from="1547019269745" duration="14279000" />
       <workItem from="1547038483668" duration="9837000" />
       <workItem from="1547099837652" duration="14964000" />
-      <workItem from="1547188071472" duration="20731000" />
+      <workItem from="1547188071472" duration="23001000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="160369000" />
+    <option name="totallyTimeSpent" value="162639000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -220,7 +219,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1366" height="678" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49726775" visible="true" weight="0.21146686" />
       <window_info id="Structure" order="1" sideWeight="0.5027322" side_tool="true" weight="0.21146686" />
@@ -345,16 +343,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/formcontrol.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="133" lean-forward="true" selection-start-line="133" selection-end-line="133" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/component/sidebar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -367,8 +355,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/grid.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="131" column="51" lean-forward="true" selection-start-line="131" selection-start-column="51" selection-end-line="131" selection-end-column="51" />
+        <state relative-caret-position="900">
+          <caret line="60" column="27" lean-forward="true" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/component/formcontrol.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1201">
+          <caret line="94" column="46" lean-forward="true" selection-start-line="94" selection-start-column="46" selection-end-line="94" selection-end-column="46" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
