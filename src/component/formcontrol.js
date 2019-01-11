@@ -113,7 +113,8 @@ render() {
                 <InputGroup size="sm">
                     <InputGroupAddon addonType="prepend">Max:</InputGroupAddon>
                     <Input
-                        type="text"
+                        type="number"
+                        pattern="[0-9.]*"
                         name="maxPrice"
                         value={this.state.maxPrice}
                         onChange={this.onChangeData.bind(this)}
@@ -122,7 +123,8 @@ render() {
                 <InputGroup size="sm">
                     <InputGroupAddon addonType="prepend">Min:</InputGroupAddon>
                     <Input
-                        type="text"
+                        type="number"
+                        pattern="[0-9.]*"
                         name="minPrice"
                         value={this.state.minPrice}
                         onChange={this.onChangeData.bind(this)}
@@ -154,12 +156,13 @@ render() {
                     }
 
                 </select>
+                <hr/>
 
 
                 {/*Radio button*/}
 
                 <FormGroup tag="fieldset">
-                    <legend>Rating</legend>
+                    <legend>Pricing</legend>
 
                     {
                         this.state.intrValArrState.map(function(val , key) {
