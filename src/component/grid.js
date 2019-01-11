@@ -86,7 +86,10 @@ class Grid extends React.Component {
         || this.state.sideBarFormstateSelectValue !== null || this.state.sideBarFormstateRateLeft !== null
         || this.state.sideBarFormstateRateRight !== null){
 
-            if(this.state.sideBarFormstateMaxPrice.length > 0)
+
+            //Single value check maxPrice Start
+
+            if(this.state.sideBarFormstateMaxPrice !== null)
             {
                 var temp = [];
                 var loopArr = this.state.cabDetails;
@@ -107,22 +110,64 @@ class Grid extends React.Component {
 
                 this.setState({cabDetailsFilter : temp});
 
+            }else if(this.state.sideBarFormstateMinPrice !== null)
+            {
+                var temp = [];
+                var loopArr = this.state.cabDetails;
+                _.forEach(loopArr, function(value, key) {
+                    _.forEach(value, function(val , k){
+                        if(k === "budgetPlanPerHr")
+                        {
+
+                            if(val > 0 && val <= parseInt(parentThis.state.sideBarFormstateMinPrice)){
+                                //console.log(key +':------'+ value);
+                                temp.push(value);
+                            }
+                        }
+
+                    });
+
+                });
+
+                this.setState({cabDetailsFilter : temp});
+
+            }else if(this.state.sideBarFormstateMinPrice !== null && this.state.sideBarFormstateMaxPrice !== null){
+
+                var temp = [];
+                var loopArr = this.state.cabDetails;
+                _.forEach(loopArr, function(value, key) {
+                    _.forEach(value, function(val , k){
+                        if(k === "budgetPlanPerHr")
+                        {
+
+                            if(val >= parseInt(parentThis.state.sideBarFormstateMinPrice) && val <= parseInt(parentThis.state.sideBarFormstateMaxPrice)){
+                                //console.log(key +':------'+ value);
+                                temp.push(value);
+                            }
+                        }
+
+                    });
+
+                });
+
+                this.setState({cabDetailsFilter : temp});
             }
 
-            //console.log("validation working");
+            //--------------Single value check minPrice END------------------------------------------
 
         }else{
 
             //console.log("Form value blank");
             return false;
         }
+
     }
 
 
     render() {
-        console.log("In render method");
+        /*console.log("In render method");
         console.log(this.state.cabDetailsFilter);
-        console.log(this.state.cabDetails);
+        console.log(this.state.cabDetails);*/
 
         return (
             <Container>
