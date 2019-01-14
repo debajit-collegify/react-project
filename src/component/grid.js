@@ -17,193 +17,166 @@ class Grid extends React.Component {
             sideBarFormstateMaxPrice: '',
             sideBarFormstateSelectValue: '',
             sideBarFormstateRateLeft: '1',
-            sideBarFormstateRateRight: '1'
+            sideBarFormstateRateRight: '1',
+            sideBarFormStateCheckBoxMin:null,
+            sideBarFormStateCheckBoxMax:null
         }
 
+        this.minMaxSectionFilter = this.minMaxSectionFilter.bind(this);
         this.validateSidebarStateData = this.validateSidebarStateData.bind(this);
+        this.typeSectionfilter = this.typeSectionfilter.bind(this);
+        this.checkBoxSectionFilter = this.checkBoxSectionFilter.bind(this);
 
 
+        //Axios call to get data from API
 
         axios.get(`http://www.mocky.io/v2/5c33093a2e00007b12121e1d`)
             .then(res => {
                 console.log(res.data);
-                this.setState({cabDetails : res.data});
+                this.setState({cabDetails : res.data , cabDetailsFilter : res.data});
 
             });
 
     }
 
 
+
+
+    //Sidebar filter form events called from formcontrol page.
+
     onChnage = (sideBarFormstate) =>{
 
-        if(this.state.sideBarFormstateRateLeft !== null && this.state.sideBarFormstateRateRight !== null){
-            if(sideBarFormstate.rate !== null){
-                var res = sideBarFormstate.rate.split("-");
-           this.setState({
-                   sideBarFormstateMinPrice : sideBarFormstate.minPrice,
-                   sideBarFormstateMaxPrice : sideBarFormstate.maxPrice,
-                   sideBarFormstateSelectValue : sideBarFormstate.selectValue,
-                   sideBarFormstateRateLeft : res[0],
-                   sideBarFormstateRateRight : res[1]},
-               () => {
-                   this.validateSidebarStateData();
-                   //console.log("state set");
-               }
+        this.setState({
+                sideBarFormstateMinPrice : sideBarFormstate.minPrice,
+                sideBarFormstateMaxPrice : sideBarFormstate.maxPrice,
+                sideBarFormstateSelectValue : sideBarFormstate.selectValue,
+                sideBarFormStateCheckBoxMin : sideBarFormstate.checkBoxMinValue,
+                sideBarFormStateCheckBoxMax : sideBarFormstate.checkBoxMaxValue,
 
-           );
-            }else{
-                this.setState({
-                        sideBarFormstateMinPrice : sideBarFormstate.minPrice,
-                        sideBarFormstateMaxPrice : sideBarFormstate.maxPrice,
-                        sideBarFormstateSelectValue : sideBarFormstate.selectValue,
-                        sideBarFormstateRateLeft : '1',
-                        sideBarFormstateRateRight : '1'},
-                    () => {
-                        this.validateSidebarStateData();
-                        //console.log("state set");
-                    })
+            },
+            () => {
+                this.validateSidebarStateData();
+                console.log("submit button clicked");
+
             }
 
-        }
-
-        /*else{
-            this.setState({sideBarFormstateRateLeft : '1',
-                    sideBarFormstateRateRight : '1'},
-                () => {
-                    console.log("rate data is blank");
-                    this.validateSidebarStateData();
-                })
-
-        }*/
+        );
 
 
-    }
 
+}
 
-    validateSidebarStateData = () => {
+    minMaxSectionFilter = () => {
         const parentThis = this;
-        if(this.state.sideBarFormstateMinPrice !== null || this.state.sideBarFormstateMaxPrice !== null
-        || this.state.sideBarFormstateSelectValue !== null || this.state.sideBarFormstateRateLeft !== null
-        || this.state.sideBarFormstateRateRight !== null){
-
-
-            //Single value check maxPrice Start
+        if(this.state.sideBarFormstateMinPrice !== null || this.state.sideBarFormstateMaxPrice !== null){
 
             if(this.state.sideBarFormstateMaxPrice !== null)
             {
-                //console.log(parentThis.state.sideBarFormstateMaxPrice);
-                var temp = [];
-                var loopArr = this.state.cabDetails;
-                _.forEach(loopArr, function(value, key) {
-                    _.forEach(value, function(val , k){
-                        if(k === "budgetPlanPerHr")
-                        {
-
-                            if(val > 0 && val <= parseInt(parentThis.state.sideBarFormstateMaxPrice)){
-                                //console.log(key +':------'+ value);
-                                temp.push(value);
-                                console.log(value);
-                            }
-                        }
-
-                    });
-
+               var loopArr = this.state.cabDetailsFilter;
+               var filterdataMaxPrice =  this.state.cabDetailsFilter.filter( (value) => {
+                    return value.budgetPlanPerHr <= parentThis.state.sideBarFormstateMaxPrice;
                 });
+                console.log(filterdataMaxPrice);
 
-                this.setState({cabDetailsFilter : temp});
+                this.setState({cabDetailsFilter : filterdataMaxPrice});
 
             }
 
-            //Single value check minPrice Start
 
             if(this.state.sideBarFormstateMinPrice !== null)
             {
-                //console.log(parentThis.state.sideBarFormstateMinPrice);
-                var temp = [];
-                var loopArr = this.state.cabDetails;
-                _.forEach(loopArr, function(value, key) {
-                    _.forEach(value, function(val , k){
-                        if(k === "budgetPlanPerHr")
-                        {
-
-                            if(val >= parseInt(parentThis.state.sideBarFormstateMinPrice)){
-                                //console.log(key +':------'+ value);
-                                temp.push(value);
-                                console.log(value);
-                            }
-                        }
-
-                    });
-
+                var loopArr = this.state.cabDetailsFilter;
+                var filterdataMinPrice =  this.state.cabDetailsFilter.filter( (value) => {
+                    return value.budgetPlanPerHr >= parentThis.state.sideBarFormstateMinPrice;
                 });
+                //console.log(filterdataMinPrice);
 
-                this.setState({cabDetailsFilter : temp});
+                this.setState({cabDetailsFilter : filterdataMinPrice});
 
             }
-
-            //Combination of Max and Min
 
             if(this.state.sideBarFormstateMinPrice !== null && this.state.sideBarFormstateMaxPrice !== null){
 
-                var temp = [];
-                var loopArr = this.state.cabDetails;
-                _.forEach(loopArr, function(value, key) {
-                    _.forEach(value, function(val , k){
-                        if(k === "budgetPlanPerHr")
-                        {
-
-                            if(val >= parseInt(parentThis.state.sideBarFormstateMinPrice) && val <= parseInt(parentThis.state.sideBarFormstateMaxPrice)){
-                                //console.log(key +':------'+ value);
-                                temp.push(value);
-                            }
-                        }
-
-                    });
-
+                var loopArr = this.state.cabDetailsFilter;
+                var filterdataMaxPriceMinPrice =  this.state.cabDetailsFilter.filter( (value) => {
+                    return value.budgetPlanPerHr >= parentThis.state.sideBarFormstateMinPrice &&
+                        value.budgetPlanPerHr <= parentThis.state.sideBarFormstateMaxPrice;
                 });
+                console.log(filterdataMaxPriceMinPrice);
 
-                this.setState({cabDetailsFilter : temp});
-            }
+                this.setState({cabDetailsFilter : filterdataMaxPriceMinPrice});
 
-            //Type filter
-
-            if(this.state.sideBarFormstateSelectValue !== null){
-
-                var temp = [];
-                var loopArr = this.state.cabDetails;
-                _.forEach(loopArr, function(value, key) {
-                    _.forEach(value, function(val , k){
-                        if(k === "carType" && val === parentThis.state.sideBarFormstateSelectValue)
-                        {
-
-                            temp.push(value);
-                        }
-
-                    });
-
-                });
-                console.log(temp);
-
-                this.setState({cabDetailsFilter : temp});
             }
 
 
         }else{
 
-            //console.log("Form value blank");
             return false;
         }
 
     }
 
+    typeSectionfilter = () => {
+        const parentThis = this;
+        if(this.state.sideBarFormstateSelectValue !== null){
+
+            var loopArr = this.state.cabDetailsFilter;
+            var filterdataCarType =  this.state.cabDetailsFilter.filter( (value) => {
+                return value.carType === parentThis.state.sideBarFormstateSelectValue;
+            });
+            //console.log(filterdataCarType);
+
+            this.setState({cabDetailsFilter : filterdataCarType});
+
+        }else{
+
+            return false;
+        }
+
+    }
+
+    checkBoxSectionFilter = () => {
+
+        const parentThis = this;
+        if(this.state.sideBarFormStateCheckBoxMin !== null && this.state.sideBarFormStateCheckBoxMax !== null){
+
+            var loopArr = this.state.cabDetailsFilter;
+            var filterdataCheckBox =  this.state.cabDetailsFilter.filter( (value) => {
+                return value.budgetPlanPerHr >= parentThis.state.sideBarFormStateCheckBoxMin
+                    && value.budgetPlanPerHr <= parentThis.state.sideBarFormStateCheckBoxMax;
+            });
+            //console.log(filterdataCheckBox);
+
+            this.setState({cabDetailsFilter : filterdataCheckBox});
+
+        }else{
+
+            return false;
+        }
+
+}
+
+    validateSidebarStateData = () => {
+        this.setState({cabDetailsFilter : this.state.cabDetails},
+
+            () => {
+
+                this.minMaxSectionFilter();
+                this.typeSectionfilter();
+                this.checkBoxSectionFilter();
+                console.log("validate function called");
+            });
+
+        //console.log("validation function called successfuly");
+
+    }
+
 
     render() {
-        /*console.log("In render method");
-        console.log(this.state.cabDetailsFilter);
-        console.log(this.state.cabDetails);*/
-
+        
         return (
             <Container>
+                <hr/>
 
                 <Row>
                     <Col sm="3" xs="12">
@@ -213,14 +186,10 @@ class Grid extends React.Component {
                     <Col sm="9" xs="12">
                         <Row>
                             {
-                                (this.state.cabDetailsFilter.length === 0) ?
-                                    this.state.cabDetails.map((dynamicData, i) =>
-                                     <Col sm="4" xs="12"><CardComponent key={i} fromAppViaGridAlertFlow = {this.props.fromAppAlertFlow}
-                                     componentData = {dynamicData} /></Col>) :
+                                this.state.cabDetailsFilter.map((dynamicData, i) =>
+                                <Col sm="4" xs="12"><CardComponent key={i} fromAppViaGridAlertFlow = {this.props.fromAppAlertFlow}
+                                componentData = {dynamicData} /></Col>)
 
-                                    this.state.cabDetailsFilter.map((dynamicData, i) =>
-                                    <Col sm="4" xs="12"><CardComponent key={i} fromAppViaGridAlertFlow = {this.props.fromAppAlertFlow}
-                                    componentData = {dynamicData} /></Col>)
                             }
                         </Row>
                     </Col>

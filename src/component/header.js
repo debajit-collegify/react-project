@@ -30,10 +30,10 @@ class Header extends React.Component {
         return (
             <div>
                 <Navbar color="info" light expand="md">
-                    <NavbarBrand href="/">CAB Booking</NavbarBrand>
+                    <NavbarBrand >CAB Booking</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
+                        {/*<Nav className="ml-auto" navbar>
                             <NavItem>
                                 <NavLink href="/">Components</NavLink>
                             </NavItem>
@@ -54,7 +54,7 @@ class Header extends React.Component {
                                     </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
-                        </Nav>
+                        </Nav>*/}
                     </Collapse>
                 </Navbar>
             </div>

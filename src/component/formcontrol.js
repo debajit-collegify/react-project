@@ -29,7 +29,9 @@ class FormControl extends React.Component {
             rating: [],      /*props.forwordDataCabDetails*/
             intrValArrState: [],
             rate: null,
-            rateCheckBox: []
+            rateCheckBox: [],
+            checkBoxMinValue:null,
+            checkBoxMaxValue:null
         };
 
 
@@ -66,9 +68,7 @@ class FormControl extends React.Component {
             rates.push(value.budgetPlanPerHr)
         });
 
-        /*this.setState({rating : rates}, () => {
-            max = _.max(this.state.rating);
-        });*/
+
         this.setState({rating : rates});
         var max = _.max(rates);
         var min = _.min(rates);
@@ -91,8 +91,32 @@ class FormControl extends React.Component {
         state[e.target.name] = e.target.value;
         this.setState(state);
     }
-    onChangeCheckBox = () => {
-        console.log("checkbox click working");
+
+    onChangeCheckBox = (e) => {
+        const state = this.state;
+        this.state.rateCheckBox.push(e.target.value);
+        this.setState(state.rateCheckBox);
+        let max = '';
+        let min = '';
+        let arr = [];
+        if(this.state.rateCheckBox.length > 0){
+            for(var val of this.state.rateCheckBox){
+
+                let indexWiseValue = val.split("-");
+                arr.push(indexWiseValue[0]);
+                arr.push(indexWiseValue[1]);
+            }
+        }
+        max = _.max(arr);
+        min = _.min(arr);
+        this.setState({checkBoxMinValue : min , checkBoxMaxValue: max},
+            () => {
+
+                //console.log(this.state.checkBoxMinValue +'----------------------'+ this.state.checkBoxMaxValue);
+            });
+
+        //console.log(this.state.checkBoxMinValue +'----------------------'+ this.state.checkBoxMaxValue);
+
     }
     handleSubmitForm = (e) => {
         e.preventDefault();
@@ -165,7 +189,7 @@ render() {
                 <hr/>
 
 
-                {/*Radio button*/}
+                {/*checkbox for multiple value*/}
 
                 <FormGroup tag="fieldset">
                     <legend>Pricing</legend>
