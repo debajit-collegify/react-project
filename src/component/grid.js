@@ -173,7 +173,7 @@ class Grid extends React.Component {
 
 
     render() {
-        
+
         return (
             <Container>
                 <hr/>

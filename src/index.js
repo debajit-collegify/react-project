@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Login from './component/login';
 import * as serviceWorker from './serviceWorker';
+
+//Previous component was App.
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

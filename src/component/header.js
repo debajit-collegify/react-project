@@ -1,4 +1,6 @@
 import React from 'react';
+import '../App.css';
+import ModalLogin from './modallogin';
 import {
     Collapse,
     Navbar,
@@ -18,26 +20,36 @@ class Header extends React.Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            modal: false
         };
     }
     toggle() {
         this.setState({
-            isOpen: !this.state.isOpen
+            isOpen: !this.state.isOpen,
+            modal: !this.state.modal
         });
     }
+
     render() {
         return (
             <div>
+
                 <Navbar color="info" light expand="md">
                     <NavbarBrand >CAB Booking</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
-                        {/*<Nav className="ml-auto" navbar>
+                        <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="/">Components</NavLink>
+                                <NavLink className="loginLink" onClick={this.toggle}>Login</NavLink>
+
                             </NavItem>
-                            <UncontrolledDropdown nav inNavbar>
+
+                            {
+                                (this.state.modal) ? <ModalLogin /> : ''
+                            }
+
+                            {/*<UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
                                     Options
                                 </DropdownToggle>
@@ -53,10 +65,11 @@ class Header extends React.Component {
                                         Reset
                                     </DropdownItem>
                                 </DropdownMenu>
-                            </UncontrolledDropdown>
-                        </Nav>*/}
+                            </UncontrolledDropdown>*/}
+                        </Nav>
                     </Collapse>
                 </Navbar>
+
             </div>
         );
     }

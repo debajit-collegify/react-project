@@ -29,6 +29,7 @@ class App extends Component {
 
     return (
       <div className="App">
+
         <h2>Book Your <Badge color="primary">CAB</Badge> Here</h2>
         <Header />
 
