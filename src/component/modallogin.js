@@ -6,7 +6,7 @@ class ModalLogin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            modal: false,
+            modal: true,
             isOpen :false,
             username:'',
             password:'',
@@ -59,7 +59,6 @@ class ModalLogin extends React.Component {
     render() {
         return (
             <div>
-                <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}>Login To Book Cab</ModalHeader>
                     {
