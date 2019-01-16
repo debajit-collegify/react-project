@@ -1,21 +1,22 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Col, Row, Form, FormGroup, Label, Input, FormText ,FormFeedback } from 'reactstrap';
+import axios from 'axios';
 
 class ModalLogin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             modal: true,
-            isOpen :false,
+            isOpen :true,
             username:'',
             password:'',
             isLogIn: false,
-            loginCredential : false,
             loginMsg : null
         };
 
         this.toggle = this.toggle.bind(this);
+        this.parseJwt = this.parseJwt.bind(this);
     }
 
     toggle() {
@@ -28,27 +29,56 @@ class ModalLogin extends React.Component {
         });
     }
 
+    parseJwt = (token) => {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace('-', '+').replace('_', '/');
+        return JSON.parse(atob(base64));
+    }
+
     handleClick = (e) => {
         e.preventDefault();
-
-        console.log('UserName is' + this.state.username);
-        console.log('Password is' + this.state.password);
-        console.log("login button working inside modal");
 
         const state = this.state;
         state[e.target.name] = e.target.value;
         this.setState(state , () => {
         });
 
-        if(this.state.username === "collegify" && this.state.password === "0000"){
-            this.setState({loginCredential:true}, () => {
+        //Section Axios call to validate user for login:--
 
-                this.toggle();
-            });
+       var bodyParameters = {
 
-        }else{
-            this.setState({loginMsg : "UserId Or Password Not Matched"});
+            "email" : this.state.username,
+            "password" : this.state.password,
+            "loginType":"backend"
         }
+
+        axios.post(
+            'http://18.188.170.189:3000/api/v1/user/login?_format=json', bodyParameters).then((response) => {
+
+                if(response.status === 200){
+                   localStorage.setItem('userKey', response.data.data.accessToken);
+
+                    //console.log(JSON.parse(localStorage.getItem('userKey')));
+                    //localStorage.removeItem('userKey');
+
+                    let tokenData = this.parseJwt(localStorage.getItem('userKey'));
+                    let firstName = tokenData.firstName;
+                    let lastName = tokenData.lastName;
+                    let name = firstName + ''+ lastName;
+                    //localStorage.setItem('userName' , JSON.stringify(name));
+                    //console.log(JSON.parse(localStorage.getItem('userName')));
+                    this.props.data(name);
+
+                    this.toggle();
+
+                }
+
+        }).catch((error) => {
+                console.log(error);
+            this.setState({loginMsg : "UserId OR Password Does'nt Matched"});
+        });
+
+
     }
     onChangeData = (e) => {
         const state = this.state;

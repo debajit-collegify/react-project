@@ -9,6 +9,7 @@ class CardComponent extends  React.Component {
         super(props);
         this.state = {
             toggle: false,
+            checkBookButton:false
         }
 
     }
@@ -17,6 +18,14 @@ class CardComponent extends  React.Component {
         this.setState({
             toggle: !this.state.toggle /*!this.state.toggle*/
         });
+    }
+
+    componentDidMount() {
+        if(localStorage.getItem('userKey')){
+
+            this.setState({checkBookButton : true})
+
+        }
     }
 
 
@@ -33,7 +42,11 @@ class CardComponent extends  React.Component {
                         <CardSubtitle>Rate/hr: <b>{budgetPlanPerHr}</b></CardSubtitle>
                         <CardText>CabTitle: <b>{cabTitle}</b></CardText>
                         <CardText>CarNumber: <b>{carNUmber}</b></CardText>
-                        <Button onClick={this.toggle}>Book</Button>
+                        {
+                            (this.state.checkBookButton)?
+                            (<Button onClick={this.toggle}>Book</Button>):''
+
+                        }
                     </CardBody><hr/>
                 </Card>
                 {
