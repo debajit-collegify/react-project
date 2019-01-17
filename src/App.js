@@ -13,9 +13,14 @@ class App extends Component {
         this.state = {
             bookingFlag : false,
             bookingIdShow: null,
-            alertMsgParam: null
+            alertMsgParam: null,
+            cardBookBtnFlag: false
         };
+        this.child = React.createRef();
+
     }
+
+
 
     showAlertHere = ( msg, id) => {
         this.setState({
@@ -24,18 +29,24 @@ class App extends Component {
             alertMsgParam: msg
         });
     }
+    /*componentDidMount() {
+        console.log(this.child.current.state.loginStatus);
+        var headerStateToAppVariable = this.child.current.headerStateToApp();
+        console.log(headerStateToAppVariable);
+    }*/
 
-  render() {
 
-    return (
+    render() {
+
+        return (
       <div className="App">
 
         <h2>Book Your <Badge color="primary">CAB</Badge> Here</h2>
-        <Header />
+        <Header ref={this.child} />
 
           {(this.state.bookingFlag) ? <Alertcomponent alertMsg={ this.state.alertMsgParam +'' + this.state.bookingIdShow }  /> : ''}
 
-        <Grid fromAppAlertFlow = {this.showAlertHere}/>
+        <Grid flagData={this.child.current} fromAppAlertFlow = {this.showAlertHere}/>
       </div>
     );
   }

@@ -188,7 +188,7 @@ class Grid extends React.Component {
                             {
                                 this.state.cabDetailsFilter.map((dynamicData, i) =>
                                 <Col sm="4" xs="12"><CardComponent key={i} fromAppViaGridAlertFlow = {this.props.fromAppAlertFlow}
-                                componentData = {dynamicData} /></Col>)
+                                                     flagDataToCard = {this.props.flagData} componentData = {dynamicData} /></Col>)
 
                             }
                         </Row>

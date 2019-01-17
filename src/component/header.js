@@ -27,7 +27,9 @@ class Header extends React.Component {
         };
         this.handelLogout = this.handelLogout.bind(this);
         this.handelModalLogin = this.handelModalLogin.bind(this);
+       // this.headerStateToApp = this.headerStateToApp.bind(this);
     }
+    
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen,
@@ -39,20 +41,30 @@ class Header extends React.Component {
         this.setState({loginStatus: false , localStorageName : ''},
             () => {
                 localStorage.clear();
+                //this.props.bookBtnFlagProp();
             });
 
         console.log("logout Clicked");
     }
+
+
+
     handelModalLogin = (name) => {
 
 
         this.setState({loginStatus : true,localStorageName : name},
             () => {
 
-                //console.log("handelModalLogin clicked " + this.state.loginStatus);
-
+                console.log("Login clicked" + this.state.loginStatus);
             });
     }
+
+    /*headerStateToApp = () => {
+
+        return this.state.loginStatus;
+
+    }*/
+
     parseJwt = (token) => {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace('-', '+').replace('_', '/');

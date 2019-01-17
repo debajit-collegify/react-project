@@ -9,7 +9,7 @@ class CardComponent extends  React.Component {
         super(props);
         this.state = {
             toggle: false,
-            checkBookButton:false
+            checkBookButton:false        //this.props.cardBookBtnFlagToCardComponent
         }
 
     }
@@ -29,7 +29,11 @@ class CardComponent extends  React.Component {
     }
 
 
+
+
     render() {
+
+        console.log(this.props.flagDataToCard);
         const { imgSrc ,carType , budgetPlanPerHr , cabTitle , carNUmber} = this.props.componentData;
         return (
 
