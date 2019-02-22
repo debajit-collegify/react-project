@@ -55,6 +55,7 @@ class ModalLogin extends React.Component {
         axios.post(
             'http://18.188.170.189:3000/api/v1/user/login?_format=json', bodyParameters).then((response) => {
 
+                console.log(response);
                 if(response.status === 200){
                    localStorage.setItem('userKey', response.data.data.accessToken);
 
